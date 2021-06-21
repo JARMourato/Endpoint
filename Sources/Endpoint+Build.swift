@@ -4,8 +4,9 @@ import Foundation
 
 extension Endpoint {
     
-    public mutating func withBody(encoder: @escaping BodyEncoder) -> Endpoint {
-        self.bodyEncoder = encoder
-        return self
+    public func withBody(encoder: @escaping BodyEncoder) -> Endpoint {
+        var new = self
+        new.bodyEncoder = encoder
+        return new
     }
 }
