@@ -24,6 +24,11 @@ public struct Endpoint {
     public var parameters: Parameters = [:]
     /// The amount of time after which a request made to this endpoint should fail, if no response is received.
     public var timeoutInterval: TimeInterval = 60
+    
+    public init(method: String, path: String) {
+        self.method = method
+        self.path = path
+    }
 }
 
 extension Endpoint {
