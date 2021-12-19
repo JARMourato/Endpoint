@@ -16,10 +16,10 @@ public struct HTTPMethod: Hashable {
 
 /// A wrapper type for a set of common HTTP headers.
 public struct HTTPHeader: Hashable {
-    public static func accept(_ value: String) -> HTTPHeader { HTTPHeader(key: "Accept", value: value)}
+    public static func accept(_ value: String) -> HTTPHeader { HTTPHeader(key: "Accept", value: value) }
     public static func cacheControl(_ value: String) -> HTTPHeader { HTTPHeader(key: "Cache-Control", value: value) }
     public static func contentLength(_ value: String) -> HTTPHeader { HTTPHeader(key: "Content-Length", value: value) }
-    public static func contentType(_ value: String) -> HTTPHeader  { HTTPHeader(key: "Content-Type", value: value) }
+    public static func contentType(_ value: String) -> HTTPHeader { HTTPHeader(key: "Content-Type", value: value) }
     public static func userAgent(_ value: String) -> HTTPHeader { HTTPHeader(key: "User-Agent", value: value) }
 
     public let key: String

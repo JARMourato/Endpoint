@@ -7,7 +7,7 @@ public typealias FileParameter = (String, File)
 public typealias Files = [FileParameter]
 public typealias Headers = Set<HTTPHeader>
 public typealias ParameterEncoder = (Parameters) throws -> Data
-public typealias Parameters = [String:Any]
+public typealias Parameters = [String: Any]
 
 /// A wrapper type for uploading a file.
 public struct File {
