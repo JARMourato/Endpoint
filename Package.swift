@@ -1,26 +1,16 @@
-// swift-tools-version:5.4
+// swift-tools-version:5.7
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
 
 let package = Package(
     name: "Endpoint",
-    platforms: [
-        .iOS(.v14), .macOS(.v11)
-    ],
+    platforms: [.iOS(.v13), .macOS(.v12), .watchOS(.v6), .tvOS(.v13)],
     products: [
-        .library(name: "Endpoint", targets: ["Endpoint"])
+        .library(name: "Endpoint", targets: ["Endpoint"]),
     ],
     targets: [
-        .target(
-            name: "Endpoint",
-            dependencies: [],
-            path: "Sources"
-        ),
-        .testTarget(
-            name: "EndpointTests",
-            dependencies: ["Endpoint"],
-            path: "Tests"
-        )
+        .target(name: "Endpoint", dependencies: [], path: "Sources"),
+        .testTarget(name: "EndpointTests", dependencies: ["Endpoint"], path: "Tests"),
     ]
 )

@@ -91,7 +91,7 @@ extension Endpoint {
     // MARK: HTTPBody
 
     func buildHTTPBody() throws -> Data? {
-        if let bodyEncoder = bodyEncoder { return try bodyEncoder() }
+        if let bodyEncoder { return try bodyEncoder() }
 
         guard files.isEmpty else { return buildMultipartBody() }
 
@@ -151,9 +151,9 @@ extension Endpoint {
 
 // MARK: - Utilities
 
-extension Set: ExpressibleByDictionaryLiteral where Element == HTTPHeader {
+extension Set<HTTPHeader>: ExpressibleByDictionaryLiteral {
     func toDictionary() -> [String: String] {
-        return reduce(into: [:]) { (result: inout [String: String], header: HTTPHeader) in result[header.key] = header.value }
+        reduce(into: [:]) { (result: inout [String: String], header: HTTPHeader) in result[header.key] = header.value }
     }
 
     // MARK: ExpressibleByDictionaryLiteral conformance
