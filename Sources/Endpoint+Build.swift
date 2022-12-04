@@ -1,16 +1,9 @@
 // Copyright © 2021 João Mourato. All rights reserved.
 
 import Foundation
+import RNP
 
 public extension Endpoint {
-    /// Create an endpoint with the path and the HTTPMethod.
-    /// - Parameters:
-    ///   - method: the desired HTTPMethod.
-    ///   - path: the path to be appended to a base URL when building the URLRequest.
-    init(method: HTTPMethod, path: String) {
-        self.init(method: method.rawValue, path: path)
-    }
-
     /// Add a custom body build closure to the `Endpoint`.
     /// - Parameter encoder: A custom body encoder used to create the body of the `Endpoint` request.
     /// - Returns: Returns a copy of self with a custom body encoder.

@@ -1,9 +1,12 @@
 // Copyright © 2021 João Mourato. All rights reserved.
 
 import Foundation
+import RNP
 
 /// A representation of an API endpoint
 public struct Endpoint {
+    /// An entry point to set the baseURL. If set, it will take precedence.
+    public var baseURLString: String?
     /// An entry point to encode a custom body. If set, it will take precedence.
     public var bodyEncoder: BodyEncoder?
     /// An entry point to add custom parameter encoding. If set, it will take precedence.
@@ -25,13 +28,23 @@ public struct Endpoint {
     /// The amount of time after which a request made to this endpoint should fail, if no response is received.
     public var timeoutInterval: TimeInterval = 60
 
-    public init(method: String, path: String) {
-        self.method = method
+    /// Create an endpoint with the path and the HTTPMethod.
+    /// - Parameters:
+    ///   - method: the desired HTTPMethod.
+    ///   - path: the path to be appended to a base URL when building the URLRequest.
+    public init(method: HTTPMethod, path: String) {
+        self.method = method.rawValue
         self.path = path
     }
 }
 
 public extension Endpoint {
+    func buildURLRequest() throws -> URLRequest {
+        guard let baseURLString else { throw Failure.noBaseURLSet }
+        guard let baseURL = URL(string: baseURLString) else { throw Failure.invalidBaseURL }
+        return try buildURLRequest(with: baseURL)
+    }
+
     func buildURLRequest(with baseURL: URL) throws -> URLRequest {
         let url = baseURL.appendingPathComponent(path)
         var urlRequest = URLRequest(url: url)
@@ -170,5 +183,14 @@ extension String {
         var characterSet: CharacterSet = .alphanumerics
         characterSet.insert(charactersIn: "-._~/?")
         return addingPercentEncoding(withAllowedCharacters: characterSet)!
+    }
+}
+
+// MARK: - Errors
+extension Endpoint {
+    /// Contains the errors that the Endpoint library can throw
+    public enum Failure: Error {
+        case noBaseURLSet
+        case invalidBaseURL
     }
 }

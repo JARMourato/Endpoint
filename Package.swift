@@ -9,8 +9,11 @@ let package = Package(
     products: [
         .library(name: "Endpoint", targets: ["Endpoint"]),
     ],
+    dependencies: [
+        .package(url: "https://github.com/JARMourato/RNP.git", .upToNextMajor(from: "1.0.0")),
+    ],
     targets: [
-        .target(name: "Endpoint", dependencies: [], path: "Sources"),
+        .target(name: "Endpoint", dependencies: ["RNP"], path: "Sources"),
         .testTarget(name: "EndpointTests", dependencies: ["Endpoint"], path: "Tests"),
     ]
 )
